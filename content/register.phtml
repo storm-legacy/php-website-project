@@ -1,0 +1,27 @@
+<div class="container">
+  <span>register</span>
+  <form action="../../php-backend/register-script.php" method="POST" novalidate>
+    <div class="row">
+      <input type="email" name="email" class="inputField" placeholder="E-mail" required>
+    </div>
+    <div class="row">
+      <input type="text" name="username" class="inputField" placeholder="Username" required>
+    </div>
+    <div class="row">
+      <input type="password" name="passwd_1" class="inputField" placeholder="Password" required>
+    </div>
+    <div class="row">
+      <input type="password" name="passwd_2" class="inputField" placeholder="Confirm password" required>
+    </div>
+    <div class="row rowSmaller">
+      <input type="checkbox" name="acceptTerms">
+      <span>I read and accept the <b class="termsOfUsage">Terms of Use</b></span>
+    </div>
+    <div class="row">
+      <button type="submit" name="register-submit" class="loginButton centerButton">Register</button>
+    </div>
+    <div class="tooltip">
+      <span>Already have an account? <a href="?page=login"><b>Log in</b></a> here!</span>
+    </div>
+  </form>
+</div>

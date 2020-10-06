@@ -1,0 +1,19 @@
+<div class="container">
+  <span>account</span>
+  <form action="php-backend/login-script.php" method="POST" novalidate>
+    <div class="row">
+      <input type="text" name="usermail" class="inputField" placeholder="Username or E-mail" required>
+    </div>
+    <div class="row">
+      <input type="password" name="passwd" class="inputField" placeholder="Password" required>
+    </div>
+    <div class="rowSmaller">
+      <input type="checkbox" name="rememPasswd">
+      <span>Keep logged</span>
+    </div>
+    <div class="row">
+      <button type="submit" name="login-submit" class="loginButton">Log in</button>
+      <a href="?page=register"><button type="button" class="regButton">Register</button></a>
+    </div>
+  </form>
+</div>
