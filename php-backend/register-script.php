@@ -8,8 +8,8 @@ if(isset($_POST['register-submit'])) {
   require("database-conn.php");
 
   // * GET FIELDS 
-  $username = $_POST['username'];
-  $email = $_POST['email'];
+  $username = trim($_POST['username']);
+  $email = trim($_POST['email']);
   $passwd_1 = $_POST['passwd_1'];
   $passwd_2 = $_POST['passwd_2'];
   $termsOfUsage = $_POST['acceptTerms'];

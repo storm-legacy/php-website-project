@@ -19,21 +19,47 @@
 </head>
 <body>
   <div class="mainGrid">
+
     <header>
+      <span class="submenu-button-header fa fa-bars"></span>
       <div class="logo">
         <a href="?page=home"><span>Kitcat<i>Tube</i></span></a>
       </div>
       <form action="../../php-backend/logout-script.php" method="POST">
         <input type="submit" name="logut-submit" value="Logout">
       </form>
+      <nav>
+        <ul class="menu">
+          <?php
+            generate_menu();
+          ?>
+        </ul>
+      </nav>
     </header>
 
-    <main>
+    <div class="middleGrid">
+      <div class="submenu">
+        <aside>
 
-    </main>
+        </aside>
+      </div>
+      <div class="content">
+        <main>
+
+        </main>
+      </div>
+    </div>
 
     <footer>
-
+      <div class="footerGrid">
+        <div class="firstOne">
+        </div>
+        <div class="middle">
+          <span>© by <?php echo(get_config('author')); ?></span>
+        </div>
+        <div class="lastOne">
+        </div>
+      </div>
     </footer>
   </div>
 </body>
