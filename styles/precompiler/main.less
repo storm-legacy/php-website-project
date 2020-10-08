@@ -1,7 +1,7 @@
 @import "init.less";
 
 @height-menu: 50px;
-@width-submenu: 240px;
+@width-submenu: 245px;
 @height-footer: 30px;
 @logoParameters: 40px, 200px, 5px; //font-size, div-size, top-padding
 
@@ -21,6 +21,7 @@
 body {
   font-family: 'Lato', sans-serif;
   height: 100vh;
+  background: @color-background;
 
   .mainGrid {
     display: grid;
@@ -35,58 +36,90 @@ body {
       grid-template-columns: @height-menu extract(@logoParameters, 2) auto auto;
       background: @color-header;
 
-      & > div {
+      & > div, span {
         height: inherit;
       }
 
+      //SUBMENU BUTTON
+      span.submenu-button-header {
+        display: flex;
+        margin-left: 2px;
+        font-size: extract(@logoParameters, 1);
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          color: @color-hoverText;
+          background: @color-accent;
+        }
+      }
+
+      //MENU
+      nav {
+        height: @height-menu;
+
+        ul {
+          height: inherit;
+          display: flex;
+          flex-flow: row nowrap;
+          justify-content: flex-end;
+          list-style-type: none;
+
+          li {
+            width: 50px;
+            margin: 0 2.5px;
+            display: flex;
+            justify-content: stretch;
+            
+            a {
+              box-sizing: border-box;
+              width: inherit;
+              font-size: extract(@logoParameters, 1);
+              text-align: center;
+              transition: 0.3s;
+              
+              &:hover, &.active {
+                background: @color-accent;
+  
+                i {
+                  color: @color-hoverText;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      //LOGO CONFIGURATION
       .logo {
         box-sizing: border-box;
         font-size: extract(@logoParameters, 1);
         padding-top: extract(@logoParameters, 3);
         
       }
-
-
-      ul.menu {
-        display: flex;
-        justify-content: flex-end;
-        line-height: @height-menu;
-        font-size: 40px;
-        list-style-type: none;
-
-        li a{
-          
-          padding: 0 5px;
-          margin: 0 2.5px;
-
-          i {
-            color: @color-accent;
-          }
-
-          &:hover {
-            background: @color-accent;
-            
-            i {
-              color: @color-hoverText;
-            }
-          }
-        }
-      }
-
     }
 
-    .middleGrid {
-      background: @color-background;
-      grid-row: ~"2/3";
+    .flexContainer {
       grid-column: ~"1/3";
-      display: grid;
-      grid-template-columns: @width-submenu auto;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
 
       .submenu {
-        grid-column: ~"1/2";
-        
+        top: -@height-menu;
+        position: relative;
+        width: 0;
+        // height: 100vh;
+        overflow-y: hidden;
+        background: #fff;
+        z-index: 99;
+        transition: 0.5s;
       }
-
+      .content {
+        flex: 1 1 auto;
+      }
     }
 
     footer {

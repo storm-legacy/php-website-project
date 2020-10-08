@@ -77,12 +77,13 @@
 body {
   font-family: 'Lato', sans-serif;
   height: 100vh;
+  background: #C6C7C4;
 }
 body .mainGrid {
   display: grid;
   height: 100vh;
   grid-template-rows: 50px auto 30px;
-  grid-template-columns: 240px auto;
+  grid-template-columns: 245px auto;
 }
 body .mainGrid header {
   grid-column: 1/3;
@@ -91,43 +92,76 @@ body .mainGrid header {
   grid-template-columns: 50px 200px auto auto;
   background: #A2999E;
 }
-body .mainGrid header > div {
+body .mainGrid header > div,
+body .mainGrid header span {
   height: inherit;
+}
+body .mainGrid header span.submenu-button-header {
+  display: flex;
+  margin-left: 2px;
+  font-size: 40px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+body .mainGrid header span.submenu-button-header:hover {
+  color: #EEF0F2;
+  background: #353B3C;
+}
+body .mainGrid header nav {
+  height: 50px;
+}
+body .mainGrid header nav ul {
+  height: inherit;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  list-style-type: none;
+}
+body .mainGrid header nav ul li {
+  width: 50px;
+  margin: 0 2.5px;
+  display: flex;
+  justify-content: stretch;
+}
+body .mainGrid header nav ul li a {
+  box-sizing: border-box;
+  width: inherit;
+  font-size: 40px;
+  text-align: center;
+  transition: 0.3s;
+}
+body .mainGrid header nav ul li a:hover,
+body .mainGrid header nav ul li a.active {
+  background: #353B3C;
+}
+body .mainGrid header nav ul li a:hover i,
+body .mainGrid header nav ul li a.active i {
+  color: #EEF0F2;
 }
 body .mainGrid header .logo {
   box-sizing: border-box;
   font-size: 40px;
   padding-top: 5px;
 }
-body .mainGrid header ul.menu {
-  display: flex;
-  justify-content: flex-end;
-  line-height: 50px;
-  font-size: 40px;
-  list-style-type: none;
-}
-body .mainGrid header ul.menu li a {
-  padding: 0 5px;
-  margin: 0 2.5px;
-}
-body .mainGrid header ul.menu li a i {
-  color: #353B3C;
-}
-body .mainGrid header ul.menu li a:hover {
-  background: #353B3C;
-}
-body .mainGrid header ul.menu li a:hover i {
-  color: #EEF0F2;
-}
-body .mainGrid .middleGrid {
-  background: #C6C7C4;
-  grid-row: 2/3;
+body .mainGrid .flexContainer {
   grid-column: 1/3;
-  display: grid;
-  grid-template-columns: 240px auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
 }
-body .mainGrid .middleGrid .submenu {
-  grid-column: 1/2;
+body .mainGrid .flexContainer .submenu {
+  top: -50px;
+  position: relative;
+  width: 0;
+  overflow-y: hidden;
+  background: #fff;
+  z-index: 99;
+  transition: 0.5s;
+}
+body .mainGrid .flexContainer .content {
+  flex: 1 1 auto;
 }
 body .mainGrid footer {
   background: #e6e6e6;

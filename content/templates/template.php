@@ -29,7 +29,7 @@
         <input type="submit" name="logut-submit" value="Logout">
       </form>
       <nav>
-        <ul class="menu">
+        <ul>
           <?php
             generate_menu();
           ?>
@@ -37,10 +37,12 @@
       </nav>
     </header>
 
-    <div class="middleGrid">
+    <div class="flexContainer">
       <div class="submenu">
         <aside>
-
+          <div class="submenuContent">
+            <span class="submenu-button-submenu fa fa-close"></span>
+          </div>
         </aside>
       </div>
       <div class="content">

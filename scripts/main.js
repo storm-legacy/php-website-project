@@ -1,4 +1,4 @@
-const widthSubmenu = "240px";
+const widthSubmenu = "245px";
 let menuActive = false;
 
 //AFTER WEBPAGE IS LOADED
@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const submenuButton_header = document.querySelector(".submenu-button-header");
   const submenuButton_bar = document.querySelector(".submenu-button-submenu");
-  const submenu = document.querySelector("aside");
+  const submenu = document.querySelector(".submenu");
 
   let menuItems = document.querySelectorAll(".menu ul li a");
   menuItems.forEach(elem => {
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const switchSubmenu = (value) => {
 
     if(value == 0 | value == 1)
-      menuActive = value;
+      menuActive = !value;
 
     if (menuActive == false) {
       submenu.style.width = widthSubmenu;
