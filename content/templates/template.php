@@ -38,11 +38,14 @@
     </header>
 
     <div class="flexContainer">
-      <div class="submenu">
+      <div class="submenuContainer">
         <aside>
-          <div class="submenuContent">
-            <span class="submenu-button-submenu fa fa-close"></span>
-          </div>
+            <div class="top">
+              <span class="submenu-button-submenu fa fa-close"></span>
+              <div class="logo">
+                <a href="?page=home"><span>Kitcat<i>Tube</i></span></a>
+              </div>
+            </div>
         </aside>
       </div>
       <div class="content">

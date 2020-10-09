@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const submenuButton_header = document.querySelector(".submenu-button-header");
   const submenuButton_bar = document.querySelector(".submenu-button-submenu");
-  const submenu = document.querySelector(".submenu");
+  const submenu = document.querySelector(".submenuContainer");
 
   let menuItems = document.querySelectorAll(".menu ul li a");
   menuItems.forEach(elem => {

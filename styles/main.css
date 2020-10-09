@@ -91,6 +91,7 @@ body .mainGrid header {
   display: grid;
   grid-template-columns: 50px 200px auto auto;
   background: #A2999E;
+  z-index: 50;
 }
 body .mainGrid header > div,
 body .mainGrid header span {
@@ -151,14 +152,53 @@ body .mainGrid .flexContainer {
   flex-flow: row nowrap;
   justify-content: flex-start;
 }
-body .mainGrid .flexContainer .submenu {
-  top: -50px;
+body .mainGrid .flexContainer .submenuContainer {
   position: relative;
   width: 0;
-  overflow-y: hidden;
   background: #fff;
-  z-index: 99;
   transition: 0.5s;
+}
+body .mainGrid .flexContainer .submenuContainer aside {
+  position: absolute;
+  margin-top: -50px;
+  background: #fff;
+  width: inherit;
+  height: 100vh;
+  z-index: 99;
+  overflow: hidden;
+  box-shadow: -2px 0px 18px 7px #a8a8a8;
+}
+body .mainGrid .flexContainer .submenuContainer aside .top {
+  display: grid;
+  grid-template-columns: 50px auto;
+  height: 50px;
+  background: #846A6A;
+}
+body .mainGrid .flexContainer .submenuContainer aside .top span.submenu-button-submenu {
+  display: flex;
+  box-sizing: border-box;
+  margin-left: 2px;
+  font-size: 40px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+  padding-bottom: 3px;
+  color: #EEF0F2;
+  height: inherit;
+}
+body .mainGrid .flexContainer .submenuContainer aside .top span.submenu-button-submenu:hover {
+  color: #fa0000;
+}
+body .mainGrid .flexContainer .submenuContainer aside .top .logo {
+  height: inherit;
+  display: flex;
+  justify-content: stretch;
+  font-size: 40px;
+  padding-top: 3px;
+}
+body .mainGrid .flexContainer .submenuContainer aside .top .logo span {
+  color: #fff;
 }
 body .mainGrid .flexContainer .content {
   flex: 1 1 auto;
@@ -169,6 +209,7 @@ body .mainGrid footer {
   grid-row: 3/4;
   z-index: 5;
   box-shadow: 0px -2px 18px 7px #a8a8a8;
+  z-index: 50;
 }
 body .mainGrid footer .footerGrid {
   width: 100%;

@@ -13,7 +13,7 @@
 @color-footer: #e6e6e6;
 // @color-textTabColor: #;
 @color-activeColor: #EEE;
-@color-hoverTab: #a70808;
+@color-hoverTab: #fa0000;
 @color-background: #C6C7C4;
 @color-text: #111;
 
@@ -35,6 +35,7 @@ body {
       display: grid;
       grid-template-columns: @height-menu extract(@logoParameters, 2) auto auto;
       background: @color-header;
+      z-index: 50;
 
       & > div, span {
         height: inherit;
@@ -107,15 +108,61 @@ body {
       flex-flow: row nowrap;
       justify-content: flex-start;
 
-      .submenu {
-        top: -@height-menu;
+      .submenuContainer {
         position: relative;
         width: 0;
         // height: 100vh;
-        overflow-y: hidden;
         background: #fff;
-        z-index: 99;
         transition: 0.5s;
+
+        aside {
+          position: absolute;
+          margin-top: -@height-menu;
+          background: #fff;
+          width: inherit;
+          height: 100vh;
+          z-index: 99;
+          overflow: hidden;
+          box-shadow: -2px 0px 18px 7px rgba(168,168,168,1);
+
+          .top {
+            display: grid;
+            grid-template-columns: @height-menu auto;
+            height: @height-menu;
+            background: @color-main;
+
+            span.submenu-button-submenu {
+              display: flex;
+              box-sizing: border-box;
+              margin-left: 2px;
+              font-size: extract(@logoParameters, 1);
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+              transition: 0.3s;
+              padding-bottom: 3px;
+              color: @color-hoverText;
+              height: inherit;
+
+              &:hover {
+                color: @color-hoverTab;
+              }
+            }
+
+            .logo {
+              height: inherit;
+              display: flex;
+              justify-content: stretch;
+              font-size: extract(@logoParameters, 1);
+              padding-top: extract(@logoParameters,3) - 2px;
+
+              span {
+                color: #fff;
+              }
+            }
+          }
+
+        }
       }
       .content {
         flex: 1 1 auto;
@@ -128,6 +175,7 @@ body {
       grid-row: ~"3/4";
       z-index: 5;
       box-shadow: 0px -2px 18px 7px rgba(168,168,168,1);
+      z-index: 50;
 
       .footerGrid {
         width: 100%;
