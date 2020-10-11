@@ -7,6 +7,11 @@ if(isset($_POST['register-submit'])) {
   // * DATABASE connection
   require("database-conn.php");
 
+  if(!$connection) {
+    header("Location: $LOGIN_PAGE&error=sqlerr");
+    exit();
+  }
+
   // * GET FIELDS 
   $username = trim($_POST['username']);
   $email = trim($_POST['email']);
@@ -74,7 +79,7 @@ if(isset($_POST['register-submit'])) {
     //inform about error
     mysqli_stmt_close($stmt); //disconnect from database
     mysqli_close($connection);
-    header("Location $REG_PAGE&error=sqlerr");  //! error 'sqlerr'
+    header("Location: $LOGIN_PAGE&error=sqlerr");  //! error 'sqlerr'
     exit();
   //Execute if everything is in order
   } else {
@@ -96,7 +101,7 @@ if(isset($_POST['register-submit'])) {
   if(!mysqli_stmt_prepare($stmt, $sqlQueryEmail)) {
     mysqli_stmt_close($stmt);
     mysqli_close($connection);
-    header("Location $REG_PAGE&error=sqlerr");  //! error 'sqlerr'
+    header("Location: $LOGIN_PAGE&error=sqlerr");  //! error 'sqlerr'
     exit();
 
   } else {
@@ -122,25 +127,32 @@ if(isset($_POST['register-submit'])) {
   
   // * ADD USER TO DATABASE
   //region adduser
-  $sqlQueryInsert = "INSERT INTO users (user_username, user_email, user_password)  VALUES (?, ?, ?)";
-  $stmt = mysqli_stmt_init($connection);
-
-  if(!mysqli_stmt_prepare($stmt, $sqlQueryInsert)) {
-    mysqli_stmt_close($stmt);
-    mysqli_close($connection);
-    header("Location: $REG_PAGE&error=sqlerr&username=$username&email=$email");
-    exit();
-
-  } else {
+  
+  $connection -> autocommit(FALSE); //disable autocommit - lol
+  
+  $SQL = "INSERT INTO users (user_username, user_email, user_password)  VALUES (?, ?, ?)"; //user creating row
+  if($stmt = $connection->prepare($SQL)) {
     $encryptedPasswd = password_hash($passwd_1, PASSWORD_BCRYPT); //password encryption
-    mysqli_stmt_bind_param($stmt, "sss", $username, $email, $encryptedPasswd);
-    mysqli_stmt_execute($stmt);
 
+    $stmt->bind_param("sss", $username, $email, $encryptedPasswd);
+    $stmt->execute();
+    $stmt->close();
 
-    mysqli_stmt_close($stmt);
-    mysqli_close($connection);
+    $stmt = $connection->prepare("INSERT INTO perms (id_user) VALUES ((SELECT id_user FROM users WHERE user_username=?))"); //add coresponding permissions row
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->close();
 
+    $connection->commit();
+    $connection->close();
+    
     header("Location: $LOGIN_PAGE&regstatus=success");
+    exit();
+    
+  } else {
+
+    $connetion->close();
+    header("Location: $REG_PAGE&error=sqlerr&username=$username&email=$email");
     exit();
   }
   //endregion adduser

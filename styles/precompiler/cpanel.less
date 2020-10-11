@@ -1,0 +1,114 @@
+@import "init.less";
+
+@height-menu: 50px;
+@width-submenu: 240px;
+@height-footer: 20px;
+
+@color-header: #AF5B5B;
+@color-stronger: #F03A47;
+@color-background: #F6F4F3;
+@color-submenu: #fff;
+@color-footer: #183059;
+
+@keyframes rotation {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360); }
+}
+
+body {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  background: @color-background;
+  grid-template-columns: @width-submenu auto;
+  grid-template-rows: @height-menu auto @height-footer;
+  grid-template-areas:
+    'header header'
+    'submenu main'
+    'footer footer';
+
+  header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    background: @color-header;
+    box-shadow: -1px 6px 16px -8px rgba(0,0,0,0.75);
+    z-index: 5;
+
+    .logo {
+      font-size: 40px;
+      padding-top: 7px;
+      width: 350px;
+
+      span {
+        color: #fff;
+      }
+      i {
+        background: #b80101;
+      }
+
+      .cpanelLogo {
+        margin-top: -7px;
+        margin-left: 10px;
+        font-family: 'Lato';
+        font-weight: bolder;
+        color: #e7e7e7;
+      }
+    }
+
+    span.exitButton {
+      height: @height-menu;
+      width: @height-menu;
+      line-height: @height-menu;
+      font-size: @height-menu - 5px;
+      text-align: center;
+
+    }
+  }
+  
+  aside {
+    background: @color-submenu;
+    grid-area: submenu;
+    box-shadow: 6px -1px 16px -8px rgba(0,0,0,0.75);
+    z-index: 10;
+
+    ul {
+      width: 100%;
+
+      li {
+        width: 100%;
+        height: 45px;
+        margin: 5px 0;
+
+        a {
+          display: block;
+          width: inherit;
+          height: inherit;
+          box-sizing: border-box;
+          padding: 10px 25px;
+          text-transform: uppercase;
+          transition: 0.3s ease-in;
+          
+          i {
+            transition: 0.3s ease-in;
+          }
+
+
+          &:hover {
+            background: @color-footer;
+            color: #fff;
+
+            i {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  footer {
+    background: @color-footer;
+    grid-area: footer;
+  }
+}

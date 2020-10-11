@@ -5,7 +5,16 @@ require($_SERVER['DOCUMENT_ROOT'].'/php-backend/config.php'); //download confiur
 
 
 if(isset($_SESSION['id_user'])) {
-  require(get_template_path());
+
+  //check for logout link
+  if(isset($_GET['logout']) && $_GET['logout'] == true)
+    header("Location: php-backend/logout-script.php");
+
+  else if ($_GET['page'] == 'admin-cpanel') 
+    require(get_template_path('cpanel'));
+
+  else
+    require(get_template_path('main'));
 
 
 //if user is not registered
@@ -14,6 +23,6 @@ if(isset($_SESSION['id_user'])) {
   if($_GET['page'] != "register" && $_GET['page'] != "login")
     $_GET['page'] = 'login';
 
-  require(get_login_template_path());
+  require(get_template_path('login'));
   
 }

@@ -1,23 +1,14 @@
 @font-face {
   font-family: 'Lato';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v17/S6u9w4BMUTPHh7USew8.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v17/S6uyw4BMUTPHvxk.ttf) format('truetype');
+  src: url("fonts/Lato-Regular.ttf");
 }
 @font-face {
   font-family: 'Indie Flower';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Indie Flower'), local('IndieFlower'), url(https://fonts.gstatic.com/s/indieflower/v12/m8JVjfNVeKWVnh3QMuKkFcZlbg.ttf) format('truetype');
+  src: url("fonts/IndieFlower-Regular.ttf");
+}
+@font-face {
+  font-family: 'FA';
+  src: url("fonts/FontAwesome.otf");
 }
 * {
   color: inherit;
@@ -27,6 +18,7 @@
   font-family: Lato, sans-serif;
   outline: none;
   color: #1f1f1f;
+  -webkit-font-smoothing: antialiased;
 }
 .noselect {
   -webkit-touch-callout: none;
@@ -78,6 +70,52 @@ body {
   font-family: 'Lato', sans-serif;
   height: 100vh;
   background: #C6C7C4;
+}
+body div.errorBlock {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  background: #0000008e;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+body div.errorBlock div.errorMsg {
+  display: flex;
+  flex-flow: column nowrap;
+  background: #C6C7C4;
+  width: 250px;
+  min-height: 150px;
+  border-radius: 5px;
+}
+body div.errorBlock div.errorMsg span.title {
+  display: block;
+  padding: 5px 15px;
+  width: 100%;
+  box-sizing: border-box;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: #111;
+  background: #A2999E;
+  text-align: center;
+  font-size: 20px;
+}
+body div.errorBlock div.errorMsg span.desc {
+  display: block;
+  padding: 5px 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+body div.errorBlock div.errorMsg button {
+  width: 50px;
+  height: 30px;
+  margin: auto 100px;
+  align-self: flex-end;
+  justify-self: flex-end;
+  cursor: pointer;
 }
 body .mainGrid {
   display: grid;
@@ -154,19 +192,24 @@ body .mainGrid .flexContainer {
 }
 body .mainGrid .flexContainer .submenuContainer {
   position: relative;
+  min-width: 0;
   width: 0;
   background: #fff;
   transition: 0.5s;
 }
 body .mainGrid .flexContainer .submenuContainer aside {
-  position: absolute;
-  margin-top: -50px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
   background: #fff;
   width: inherit;
   height: 100vh;
   z-index: 99;
   overflow: hidden;
   box-shadow: -2px 0px 18px 7px #a8a8a8;
+  display: grid;
+  grid-template-rows: 50px auto 30px;
 }
 body .mainGrid .flexContainer .submenuContainer aside .top {
   display: grid;
@@ -188,9 +231,10 @@ body .mainGrid .flexContainer .submenuContainer aside .top span.submenu-button-s
   height: inherit;
 }
 body .mainGrid .flexContainer .submenuContainer aside .top span.submenu-button-submenu:hover {
-  color: #fa0000;
+  color: #ce1313;
 }
 body .mainGrid .flexContainer .submenuContainer aside .top .logo {
+  box-sizing: border-box;
   height: inherit;
   display: flex;
   justify-content: stretch;
@@ -200,8 +244,245 @@ body .mainGrid .flexContainer .submenuContainer aside .top .logo {
 body .mainGrid .flexContainer .submenuContainer aside .top .logo span {
   color: #fff;
 }
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 30px;
+  width: 245px;
+  flex-flow: column nowrap;
+}
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .profileIcon {
+  width: 163.33333333px;
+  height: 163.33333333px;
+  background: red;
+  border-radius: 15px;
+  overflow: hidden;
+}
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .profileIcon img {
+  height: inherit;
+  width: 100%;
+}
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .text {
+  display: flex;
+  justify-content: flex-start;
+  width: inherit;
+  box-sizing: border-box;
+  flex-flow: column nowrap;
+  padding: 0 40px;
+}
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .text span.title {
+  font-size: 24px;
+  font-weight: bold;
+}
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .text span.username {
+  font-size: 18px;
+  color: #353B3C;
+}
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .userPanel {
+  margin-top: 20px;
+  width: 100%;
+  min-height: 120px;
+}
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .userPanel ul {
+  width: 100%;
+  min-height: 120px;
+}
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .userPanel ul li {
+  width: 100%;
+  height: 50px;
+  margin: 5px 0;
+  vertical-align: middle;
+}
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .userPanel ul li a {
+  box-sizing: border-box;
+  padding: 5px 10px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 40px;
+  font-size: 20px;
+  color: #353B3C;
+  transition: 0.3s;
+  text-transform: uppercase;
+}
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .userPanel ul li a i {
+  color: #353B3C;
+  font-size: 25px;
+  line-height: 40px;
+  padding: 0 5px;
+  transition: 0.3s;
+}
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .userPanel ul li a:hover,
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .userPanel ul li a.active {
+  background: #353B3C;
+  color: #EEF0F2;
+}
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .userPanel ul li a:hover i,
+body .mainGrid .flexContainer .submenuContainer aside .profileContainer .userPanel ul li a.active i {
+  color: #EEF0F2;
+}
+body .mainGrid .flexContainer .submenuContainer aside .bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .mainGrid .flexContainer .submenuContainer aside .bottom a {
+  box-sizing: border-box;
+  display: block;
+  padding: 1.5px 5px;
+  border-radius: 5px;
+  padding-bottom: 2px;
+  color: #EEF0F2;
+  background: #353B3C;
+  transition: 0.3s;
+}
+body .mainGrid .flexContainer .submenuContainer aside .bottom a i {
+  color: #EEF0F2;
+  transition: 0.3s;
+}
+body .mainGrid .flexContainer .submenuContainer aside .bottom a:hover {
+  background: #846A6A;
+  color: #353B3C;
+}
+body .mainGrid .flexContainer .submenuContainer aside .bottom a:hover i {
+  color: #353B3C;
+}
 body .mainGrid .flexContainer .content {
   flex: 1 1 auto;
+  box-sizing: border-box;
+  padding: 15px;
+}
+body .mainGrid .flexContainer .content main {
+  width: 100%;
+  height: 100%;
+}
+body .mainGrid .flexContainer .content main div.videosGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 300px);
+  grid-gap: 10px;
+}
+body .mainGrid .flexContainer .content main div.videosGrid .video-block a .thumbnail {
+  position: relative;
+}
+body .mainGrid .flexContainer .content main div.videosGrid .video-block a .thumbnail span {
+  position: absolute;
+  padding: 1px 5px;
+  border-radius: 2.5px;
+  background: rgba(0, 0, 0, 0.616);
+  right: 15px;
+  bottom: 15px;
+  color: #fff;
+}
+body .mainGrid .flexContainer .content main div.videosGrid .video-block a .thumbnail img {
+  height: 240px;
+  width: 100%;
+}
+body .mainGrid .flexContainer .content main div.videosGrid div.desc a.title {
+  display: block;
+  margin: 0 30px;
+  font-size: 24px;
+  text-align: left;
+  color: #2b2b2b;
+}
+body .mainGrid .flexContainer .content main div.videosGrid div.desc a.author {
+  margin: 0 0 0 30px;
+  color: #666;
+  font-size: 14px;
+}
+body .mainGrid .flexContainer .content main div.videosGrid div.desc span.viewCount {
+  color: #666;
+  font-size: 14px;
+}
+body .mainGrid .flexContainer .content main div.uploadBlock {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body .mainGrid .flexContainer .content main div.uploadBlock .uploader {
+  box-sizing: border-box;
+  width: 480px;
+  height: 320px;
+  padding: 25px 40px;
+}
+body .mainGrid .flexContainer .content main div.uploadBlock .uploader span {
+  display: block;
+  text-align: center;
+  color: #353B3C;
+  font-size: 50px;
+}
+body .mainGrid .flexContainer .content main div.uploadBlock .uploader i {
+  display: block;
+  text-align: center;
+  font-size: 80px;
+  color: #353B3C;
+}
+body .mainGrid .flexContainer .content main div.videoWrapper {
+  display: flex;
+  justify-content: center;
+}
+body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer {
+  width: 80%;
+  max-width: 800px;
+  position: relative;
+  overflow: hidden;
+}
+body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer:hover .bar {
+  transform: translateY(0);
+}
+body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer video {
+  width: 100%;
+}
+body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer div.bar {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  right: 20px;
+  padding: 5px;
+  border-radius: 5px;
+  background: #00000086;
+  display: grid;
+  grid-template-rows: 45px 5px;
+  transform: translateY(150%);
+  transition: 0.5s;
+}
+body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer div.bar div.controls {
+  display: flex;
+  flex-flow: wrap;
+}
+body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer div.bar div.controls .buttons button {
+  background: none;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  font-size: 35px;
+  color: white;
+}
+body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer div.bar div.controls .buttons button.play::before {
+  font-family: 'FA';
+  content: '\f144';
+}
+body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer div.bar div.controls .buttons button.pause::before {
+  font-family: 'FA';
+  content: '\f28b';
+}
+body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer div.bar div.progressBar {
+  height: 5px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #000;
+}
+body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer div.bar div.progressBar div.progress {
+  height: 100%;
+  width: 100px;
+  background: red;
 }
 body .mainGrid footer {
   background: #e6e6e6;

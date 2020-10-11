@@ -44,8 +44,9 @@ main{
 
   .container {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column wrap;
     justify-content: center;
+    align-items: center;
     box-sizing: border-box;
     width: 400px;
     border-radius: 4px;
@@ -64,6 +65,41 @@ main{
 
     }
 
+    .errorBlock {
+      padding-left: 50px;
+      box-sizing: border-box;
+      width: inherit;
+      display: block;
+      text-align: left;
+
+      span.alert {
+        color: #f1fc92;
+
+        i {
+          margin-right: 5px;
+          color: #f1fc92;
+        }
+      }
+
+      span.success {
+        color: #82f087;
+
+        i {
+          margin-right: 5px;
+          color: #82f087;
+        }
+      }
+
+      span.error {
+        color: #e98b8b;
+
+        i {
+          margin-right: 5px;
+          color: #e98b8b;
+        }
+      }
+    }
+
     input.inputField {
       width: 100%;
       height: 50px;
@@ -74,6 +110,19 @@ main{
       border-radius: 2px;
       box-sizing: border-box;
       outline: none;
+      transition: 0.3s;
+
+      &.error {
+        box-sizing: border-box;
+        background: #ffecec;
+        box-shadow: 0 0 0 3pt #ac0d0dc0;
+      }
+
+      &.missing {
+        box-sizing: border-box;
+        background: #ffffec;
+        box-shadow: 0 0 0 3pt #cedb0fc0;
+      }
     }
 
     .row {

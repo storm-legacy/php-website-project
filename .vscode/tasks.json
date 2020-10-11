@@ -7,7 +7,8 @@
       "command": [
         "lessc styles/precompiler/login.less styles/login.css;",
         "lessc styles/precompiler/terms.less styles/terms.css;",
-        "lessc styles/precompiler/main.less styles/main.css",
+        "lessc styles/precompiler/main.less styles/main.css;",
+        "lessc styles/precompiler/cpanel.less styles/cpanel.css",
       ],
       "group": "build",
       "presentation": {

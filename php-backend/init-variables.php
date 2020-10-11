@@ -1,4 +1,7 @@
 <?php
+
+  error_reporting(true);
+
   define('ROOT', $_SERVER['DOCUMENT_ROOT']); //get ROOT folder location
   define('INDEX_FILE', ROOT."/index.php");
 

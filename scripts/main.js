@@ -8,11 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const submenuButton_bar = document.querySelector(".submenu-button-submenu");
   const submenu = document.querySelector(".submenuContainer");
 
-  let menuItems = document.querySelectorAll(".menu ul li a");
+  let menuItems = document.querySelectorAll(".userPanel ul li a");
   menuItems.forEach(elem => {
     elem.classList.remove("active");
   });
 
+  
   // Give menu item active class
   let query = "";
   if (GET()['page'] != undefined && GET()['page'] != null) {
@@ -26,6 +27,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+  //PRINT PERMISSIONS ERROR
+  if(GET()['error'] == "insufficientpermissions") {
+    const errorBlock = document.querySelector(".errorBlock");
+    const errorType = document.querySelector(".errorBlock .errorMsg span.title");
+    const errorDesc = document.querySelector(".errorBlock .errorMsg span.desc");
+    const errorButton = document.querySelector(".errorBlock .errorMsg button");
+
+    errorType.innerHTML = '<i class=\"fa fa-warning\"></i> Error';
+    errorDesc.innerHTML = 'You do not have permissions to access that page!';
+
+    errorBlock.style.display = 'flex';
+    errorButton.addEventListener("click", () => {
+      errorBlock.style.display = 'none';
+    });
+
+  }
+
+
   //switch menu function
   const switchSubmenu = (value) => {
 
@@ -33,13 +52,16 @@ document.addEventListener("DOMContentLoaded", () => {
       menuActive = !value;
 
     if (menuActive == false) {
+      submenu.style.minWidth = widthSubmenu;
       submenu.style.width = widthSubmenu;
       menuActive = true;
     } else if (menuActive == true) {
+      submenu.style.minWidth = "0px";
       submenu.style.width = "0px";
       menuActive = false;
     }
   }
+  switchSubmenu(menuActive);
 
 
   //Click event for submenu button

@@ -6,3 +6,4 @@ const GET = () => {
 
   return list;
 };
+

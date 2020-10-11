@@ -1,23 +1,14 @@
 @font-face {
   font-family: 'Lato';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: local('Lato Light'), local('Lato-Light'), url(https://fonts.gstatic.com/s/lato/v17/S6u9w4BMUTPHh7USew8.ttf) format('truetype');
-}
-@font-face {
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Lato Regular'), local('Lato-Regular'), url(https://fonts.gstatic.com/s/lato/v17/S6uyw4BMUTPHvxk.ttf) format('truetype');
+  src: url("fonts/Lato-Regular.ttf");
 }
 @font-face {
   font-family: 'Indie Flower';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Indie Flower'), local('IndieFlower'), url(https://fonts.gstatic.com/s/indieflower/v12/m8JVjfNVeKWVnh3QMuKkFcZlbg.ttf) format('truetype');
+  src: url("fonts/IndieFlower-Regular.ttf");
+}
+@font-face {
+  font-family: 'FA';
+  src: url("fonts/FontAwesome.otf");
 }
 * {
   color: inherit;
@@ -27,6 +18,7 @@
   font-family: Lato, sans-serif;
   outline: none;
   color: #1f1f1f;
+  -webkit-font-smoothing: antialiased;
 }
 .noselect {
   -webkit-touch-callout: none;
