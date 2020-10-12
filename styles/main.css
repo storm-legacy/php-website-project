@@ -8,7 +8,7 @@
 }
 @font-face {
   font-family: 'FA';
-  src: url("fonts/FontAwesome.otf");
+  src: url("font-awesome-4.7.0/fonts/FontAwesome.otf");
 }
 * {
   color: inherit;

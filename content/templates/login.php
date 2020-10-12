@@ -38,7 +38,7 @@
 
       </div>
       <div class="middle">
-        <span><?php echo(get_config('name')."© by ".get_config('author')); ?></span>
+        <span><?php print_name(); echo("© by ".get_config('author')); ?></span>
       </div>
       <div class="right">
 

@@ -11,8 +11,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php print_name(); ?> | ADMIN PANEL</title>
-  <link rel="stylesheet" href="../../styles/cpanel.css">
   <link rel="stylesheet" href="../../styles/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../styles/cpanel.css">
   <script src="../../scripts/functions.js"></script>
   <script src="../../scripts/cpanel.js"></script>
 </head>

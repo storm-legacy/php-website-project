@@ -12,8 +12,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php print_name(); ?> | <?php echo(strtoupper($_GET['page'])); ?></title>
-  <link rel="stylesheet" href="../../styles/main.css">
   <link rel="stylesheet" href="../../styles/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../styles/main.css">
   <script src="../../scripts/functions.js"></script>
   <script src="../../scripts/main.js"></script>
   <script src="../../scripts/html5-video-player.js"></script>
