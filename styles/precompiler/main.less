@@ -352,10 +352,11 @@ body {
 
           div.videosGrid {
             display: grid;
+            grid-auto-flow: row;
             grid-template-columns: repeat(4, 1fr);
             grid-template-rows: repeat(3, 300px);
             grid-gap: 10px;
-
+            
             .video-block {
               a {
                 .thumbnail {
@@ -384,15 +385,20 @@ body {
               a.title {
                 display: block;
                 margin: 0 30px;
-                font-size: 24px;
+                font-size: 20px;
                 text-align: left;
                 color: #2b2b2b;
+                overflow: hidden;
               }
 
               a.author {
                 margin: 0 0 0 30px;
                 color: #666;
                 font-size: 14px;
+
+                &:hover {
+                  color: @color-text;
+                }
               }
 
               span.viewCount {

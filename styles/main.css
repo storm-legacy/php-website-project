@@ -359,6 +359,7 @@ body .mainGrid .flexContainer .content main {
 }
 body .mainGrid .flexContainer .content main div.videosGrid {
   display: grid;
+  grid-auto-flow: row;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, 300px);
   grid-gap: 10px;
@@ -382,14 +383,18 @@ body .mainGrid .flexContainer .content main div.videosGrid .video-block a .thumb
 body .mainGrid .flexContainer .content main div.videosGrid div.desc a.title {
   display: block;
   margin: 0 30px;
-  font-size: 24px;
+  font-size: 20px;
   text-align: left;
   color: #2b2b2b;
+  overflow: hidden;
 }
 body .mainGrid .flexContainer .content main div.videosGrid div.desc a.author {
   margin: 0 0 0 30px;
   color: #666;
   font-size: 14px;
+}
+body .mainGrid .flexContainer .content main div.videosGrid div.desc a.author:hover {
+  color: #111;
 }
 body .mainGrid .flexContainer .content main div.videosGrid div.desc span.viewCount {
   color: #666;
