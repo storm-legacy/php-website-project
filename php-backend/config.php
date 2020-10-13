@@ -6,7 +6,7 @@
 //                  CONFIGURATION
 // ------------------------------------------------ //
   const CONF = [
-    "name" => ["Yuo", "Tube"],
+    "name" => ["Kitcat", "Tube"],
     "author" => "storm-legacy",
   ];
 

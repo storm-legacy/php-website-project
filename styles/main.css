@@ -481,7 +481,7 @@ body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer 
 }
 body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer div.bar div.progressBar div.progress {
   height: 100%;
-  width: 100px;
+  width: 0;
   background: red;
 }
 body .mainGrid footer {

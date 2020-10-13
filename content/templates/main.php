@@ -73,7 +73,17 @@
 
       <div class="content">
         <main>
-          <?php print_content($_GET['page']); ?>
+          <?php if($_GET['page'] == 'browse') {
+
+            require(".../../php-backend/printVideo-script.php");
+            echo '<div class="videosGrid">';
+            generate_videos();
+            echo '</div>';
+
+          } else {
+            print_content($_GET['page']); 
+          }
+            ?>
         </main>
       </div>
 

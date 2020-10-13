@@ -7,7 +7,6 @@ $infoDB = [
   "dbName" => "cloneTube",
 ];
 
-
 $connection = mysqli_connect($infoDB['host'], $infoDB['user'], $infoDB['passwd'], $infoDB['dbName']);
 
 if(!$connection) {
