@@ -364,6 +364,9 @@ body .mainGrid .flexContainer .content main div.videosGrid {
   grid-template-rows: repeat(3, 300px);
   grid-gap: 10px;
 }
+body .mainGrid .flexContainer .content main div.videosGrid .video-block {
+  overflow: hidden;
+}
 body .mainGrid .flexContainer .content main div.videosGrid .video-block a .thumbnail {
   position: relative;
 }
@@ -386,6 +389,7 @@ body .mainGrid .flexContainer .content main div.videosGrid div.desc a.title {
   font-size: 20px;
   text-align: left;
   color: #2b2b2b;
+  max-height: 25px;
   overflow: hidden;
 }
 body .mainGrid .flexContainer .content main div.videosGrid div.desc a.author {

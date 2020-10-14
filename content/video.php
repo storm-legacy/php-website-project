@@ -1,7 +1,7 @@
 <div class="videoWrapper">
   <div class="videoContainer">
 
-    <video class='video' src="template.mp4"></video>
+    <video class='video' src="usr_files/videos/<?php echo $_GET['link'] ?>.mp4"></video>
 
     <div class="bar">
       <div class="controls">

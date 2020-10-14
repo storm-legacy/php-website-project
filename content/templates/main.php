@@ -80,6 +80,8 @@
             generate_videos();
             echo '</div>';
 
+          } else if ($_GET['page'] == 'video'){
+            echo 'kek';
           } else {
             print_content($_GET['page']); 
           }

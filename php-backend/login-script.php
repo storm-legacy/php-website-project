@@ -32,7 +32,7 @@ if(isset($_POST['login-submit'])) {
 
   // * CHECK FOR CORESPONDING USER OR EMAIL
   // for more info check register script
-  $sqlQuery = "SELECT u.id_user, u.user_username, u.user_email, u.user_password, p.admin FROM users as u, perms as p WHERE u.id_user=p.id_user AND u.user_username=? OR u.user_email=?";
+  $sqlQuery = "SELECT u.id_user, u.user_username, u.user_title, u.user_email, u.user_password, p.admin FROM users as u, perms as p WHERE u.id_user=p.id_user AND u.user_username=? OR u.user_email=?";
 
   $stmt = mysqli_stmt_init($connection);
   if(!$stmt->prepare($sqlQuery)) {
@@ -67,6 +67,8 @@ if(isset($_POST['login-submit'])) {
         $_SESSION['username'] = $row['user_username'];
         $_SESSION['email'] = $row['user_email'];
         $_SESSION['admin'] = $row['admin'];
+        if(!empty($row['user_title']))
+          $_SESSION['title'] = $row['user_title'];
       }
 
       

@@ -5,7 +5,7 @@
   }
   require('php-backend/database-conn.php');
 
-  $SQL = "SELECT v.title, v.duration, v.views, u.user_username as author, v.file_video, v.file_thumbnail FROM videos as v, users as u WHERE u.id_user=v.author_id ";
+  $SQL = "SELECT v.title, v.duration, v.views, u.user_username as author, v.file_video, v.file_thumbnail, v.status FROM videos as v, users as u WHERE u.id_user=v.author_id ";
   $stmt = $connection -> stmt_init();
   $stmt->prepare($SQL);
   $stmt->execute();
@@ -72,11 +72,14 @@
     global $videos_folder;
 
     foreach($result as $item => $key) {
-      echo "<div class=\"video-block\"><a href=\"?page=video&link=".$key['file_video']."\">";
-      echo "<div class=\"thumbnail\"><img src=\"".$thumbnails_folder."/".$key['file_thumbnail'].".jpg\" alt=\"video-img\">";
-      echo "<span>".pretty_duration($key['duration'])."</span></div></a><div class=\"desc\">";
-      echo "<a href=\"#\" class=\"title\">".$key['title']."</a><a href=\"#\" class=\"author\">@".$key['author']."</a>";
-      echo "<span class=\"viewCount\"> - ".pretty_viewCount($key['views'])." views</span></a></div></div>";
+
+      if($key['status'] == 'public') {
+        echo "<div class=\"video-block\"><a href=\"?page=video&link=".$key['file_video']."\">";
+        echo "<div class=\"thumbnail\"><img src=\"".$thumbnails_folder."/".$key['file_thumbnail'].".jpg\" alt=\"video-img\">";
+        echo "<span>".pretty_duration($key['duration'])."</span></div></a><div class=\"desc\">";
+        echo "<a href=\"#\" class=\"title\">".$key['title']."</a><a href=\"#\" class=\"author\">@".$key['author']."</a>";
+        echo "<span class=\"viewCount\"> - ".pretty_viewCount($key['views'])." views</span></a></div></div>";
+      }
     }
 
 
