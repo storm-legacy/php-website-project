@@ -1,3 +1,5 @@
+import { GET } from "./modules/functions.js";
+
 const widthSubmenu = "245px";
 let menuActive = false;
 
@@ -7,6 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const submenuButton_header = document.querySelector(".submenu-button-header");
   const submenuButton_bar = document.querySelector(".submenu-button-submenu");
   const submenu = document.querySelector(".submenuContainer");
+  const errorBlock = document.querySelector(".errorBlock");
+  const errorType = document.querySelector(".errorBlock .errorMsg span.title");
+  const errorDesc = document.querySelector(".errorBlock .errorMsg span.desc");
+  const errorButton = document.querySelector(".errorBlock .errorMsg button");
+  const page = GET()['page']; //GET Active page
 
   let menuItems = document.querySelectorAll(".userPanel ul li a");
   menuItems.forEach(elem => {
@@ -16,8 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
   
   // Give menu item active class
   let query = "";
-  if (GET()['page'] != undefined && GET()['page'] != null) {
-    query = "." + GET()['page'];
+  if (page != undefined && page != null && isNaN(page[0]) ) {
+
+    query = "." + page;
     let elem = document.querySelector(query);
 
     //small fix to prevent uneccessery error
@@ -29,11 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //PRINT PERMISSIONS ERROR
   if(GET()['error'] == "insufficientpermissions") {
-    const errorBlock = document.querySelector(".errorBlock");
-    const errorType = document.querySelector(".errorBlock .errorMsg span.title");
-    const errorDesc = document.querySelector(".errorBlock .errorMsg span.desc");
-    const errorButton = document.querySelector(".errorBlock .errorMsg button");
-
     errorType.innerHTML = '<i class=\"fa fa-warning\"></i> Error';
     errorDesc.innerHTML = 'You do not have permissions to access that page!';
 
@@ -69,5 +72,24 @@ document.addEventListener("DOMContentLoaded", () => {
   submenuButton_bar.addEventListener("click", switchSubmenu);
 
 
+  // Load additional modules according to page needs
+  switch(page) {
+    case "profile":
+      import('./modules/profile.js');
+      if (GET()['error'] != null && GET()['error'] != undefined) {
+        errorType.innerHTML = '<i class=\"fa fa-warning\"></i> Error';
+        errorDesc.innerHTML = 'Data have not changed!';
+
+        errorBlock.style.display = 'flex';
+        errorButton.addEventListener("click", () => {
+          errorBlock.style.display = 'none';
+        });
+      }
+      break;
+
+    case "video":
+      import('./modules/html5-video-player.js');
+      break;
+  }
 
 });

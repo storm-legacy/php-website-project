@@ -1,25 +1,15 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Compile LESS",
-      "type": "shell",
-      "command": [
-        "lessc styles/precompiler/login.less styles/login.css;",
-        "lessc styles/precompiler/terms.less styles/terms.css;",
-        "lessc styles/precompiler/main.less styles/main.css;",
-        "lessc styles/precompiler/cpanel.less styles/cpanel.css",
-      ],
-      "group": "build",
-      "presentation": {
-        "echo": true,
-        "reveal": "silent",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": true
-      },
-      "problemMatcher": []
-    },
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "gulp",
+			"task": "start",
+			"problemMatcher": [],
+			"label": "gulp: start",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
 }

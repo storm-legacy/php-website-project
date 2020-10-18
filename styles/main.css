@@ -35,6 +35,10 @@
   /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+.breakRow {
+  flex-basis: 100%;
+  height: 0;
+}
 .logo {
   display: flex;
   justify-content: center;
@@ -255,7 +259,6 @@ body .mainGrid .flexContainer .submenuContainer aside .profileContainer {
 body .mainGrid .flexContainer .submenuContainer aside .profileContainer .profileIcon {
   width: 163.33333333px;
   height: 163.33333333px;
-  background: red;
   border-radius: 15px;
   overflow: hidden;
 }
@@ -272,7 +275,7 @@ body .mainGrid .flexContainer .submenuContainer aside .profileContainer .text {
   padding: 0 40px;
 }
 body .mainGrid .flexContainer .submenuContainer aside .profileContainer .text span.title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
 }
 body .mainGrid .flexContainer .submenuContainer aside .profileContainer .text span.username {
@@ -352,6 +355,7 @@ body .mainGrid .flexContainer .content {
   flex: 1 1 auto;
   box-sizing: border-box;
   padding: 15px;
+  overflow: hidden;
 }
 body .mainGrid .flexContainer .content main {
   width: 100%;
@@ -492,6 +496,232 @@ body .mainGrid .flexContainer .content main div.videoWrapper div.videoContainer 
   height: 100%;
   width: 0;
   background: red;
+}
+body .mainGrid .flexContainer .content main div.container404 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-flow: column nowrap;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+body .mainGrid .flexContainer .content main div.container404 h1 {
+  display: block;
+  width: 100%;
+  font-size: 5em;
+  z-index: 10;
+}
+body .mainGrid .flexContainer .content main div.container404 span {
+  font-size: 4em;
+  text-align: center;
+  z-index: 10;
+}
+body .mainGrid .flexContainer .content main div.container404 span a {
+  color: #353B3C;
+  transition: 0.2s;
+}
+body .mainGrid .flexContainer .content main div.container404 span a:hover {
+  color: #846A6A;
+}
+body .mainGrid .flexContainer .content main div.container404 img {
+  top: -15px;
+  left: -15px;
+  position: absolute;
+  height: calc(100% + 30px);
+  width: calc(100% + 30px);
+  z-index: 0;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer .icon {
+  font-family: 'FA';
+  cursor: pointer;
+  color: #353B3C;
+  font-size: 30px;
+  line-height: 40px;
+  margin-left: 10px;
+  align-self: center;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer .icon:hover {
+  color: #846A6A;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer span.edit::before {
+  font-family: 'FA';
+  cursor: pointer;
+  color: #353B3C;
+  font-size: 30px;
+  line-height: 40px;
+  margin-left: 10px;
+  align-self: center;
+  content: '\f14b';
+}
+body .mainGrid .flexContainer .content main div.customizationContainer span.edit::before:hover {
+  color: #846A6A;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer span.apply::before {
+  font-family: 'FA';
+  cursor: pointer;
+  color: #353B3C;
+  font-size: 30px;
+  line-height: 40px;
+  margin-left: 10px;
+  align-self: center;
+  content: '\f058';
+}
+body .mainGrid .flexContainer .content main div.customizationContainer span.apply::before:hover {
+  color: #846A6A;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
+  width: 100%;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form h3 {
+  font-size: 30px;
+  text-align: center;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .profileInfo {
+  display: inline-flex;
+  flex-flow: column wrap;
+  width: 395px;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .profileInfo .errorRow {
+  box-sizing: border-box;
+  padding: 0 40px !important;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .profileInfo .errorRow span.error {
+  font-size: 16px;
+  color: #a36406;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .profileInfo .errorRow span.error::before {
+  font-family: 'FA';
+  cursor: pointer;
+  color: #353B3C;
+  font-size: 30px;
+  line-height: 40px;
+  margin-left: 10px;
+  align-self: center;
+  color: #a36406;
+  content: '\f06a';
+  font-size: 15px;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .profileInfo .errorRow span.error::before:hover {
+  color: #846A6A;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .profileInfo .row {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 5px 0;
+  padding: 5px;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .profileInfo .row.error {
+  background: #cc0000af;
+  border-radius: 10px;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .profileInfo .row.error span.inputDesc {
+  color: #d8d8d8;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .profileInfo .row span.inputDesc {
+  display: inline-block;
+  width: 90px;
+  font-size: 20px;
+  line-height: 40px;
+  margin-right: 5px;
+  text-align: right;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .profileInfo .row input[type="text"] {
+  width: 200px;
+  height: 20px;
+  font-size: 16px;
+  padding: 5px 10px;
+  justify-self: flex-end;
+  align-self: center;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .profileInfo .editEmail {
+  margin-bottom: 0;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .profileInfo .confirmEmail {
+  display: none;
+  margin: 5px 0;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .avatarBlock {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-flow: column nowrap;
+  padding: 5px;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .avatarBlock input[type='file'] {
+  width: 180px;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .avatarBlock .avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  width: 220px;
+  background: white;
+  border-radius: 5px;
+  margin: 15px 0;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .avatarBlock .avatar img {
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  border-radius: 5px;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .buttonsBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 400px;
+  min-height: 40px;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .buttonsBlock button[type='submit'] {
+  padding: 10px 25px;
+  font-size: 20px;
+  cursor: pointer;
+}
+body .mainGrid .flexContainer .content main div.customizationContainer form .buttonsBlock button[type='submit']:disabled {
+  cursor: not-allowed;
 }
 body .mainGrid footer {
   background: #e6e6e6;

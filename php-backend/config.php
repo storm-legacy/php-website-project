@@ -24,6 +24,10 @@
     "login" => TEMPLATES_FOLDER."login.php",
     "cpanel" => TEMPLATES_FOLDER."cpanel.php"
   ];
+
+  const ERROR_FILES = [
+    "404" => ERRORS_FOLDER."404.phtml",
+  ];
   
   //Content to be placed inside templates
   const CONTENT_FILES = [
@@ -31,20 +35,23 @@
     "login" => CONTENT_FOLDER."login.phtml",
     "register" => CONTENT_FOLDER."register.phtml",
     "terms-of-use" => CONTENT_FOLDER."terms-of-use.phtml",
-    
-    // * ERROR PAGES
-    "404" => ERRORS_FOLDER."404.phtml",
-    
+
     // * OTHER PAGES
     "upload" => CONTENT_FOLDER."upload.phtml",
     "home" => CONTENT_FOLDER."home.phtml",
+
+  ];
+
+  const DYNAMIC_PAGES = [
     "browse" => CONTENT_FOLDER."browse.php",
-    "video" => CONTENT_FOLDER."video.php"
+    "video" => CONTENT_FOLDER."video.php",
+    "profile" => CONTENT_FOLDER."profile.php"
   ];
 
 // ------------------------------------------------------------------ \\
 //                           DANGER ZONE
 // ------------------------------------------------------------------ //
+
   function print_name() {
     echo(CONF['name'][0].CONF['name'][1]);
   }
@@ -68,13 +75,15 @@
 
   // * PRINT FROM CONTENT_FOLDER TO SITE
   function print_content($page) {
-    //check if specified
-    $page_tmp = isset(CONTENT_FILES[$page]) ? CONTENT_FILES[$page] : "404";
-    //check if file corelated with page exists
-    if(file_exists($page_tmp))
-      echo(file_get_contents($page_tmp));
-    else
-      echo(file_get_contents(CONTENT_FILES['404']));
+
+    if(!empty(CONTENT_FILES[$page]) && file_exists(CONTENT_FILES[$page]))
+      print(file_get_contents(CONTENT_FILES[$page]));
+
+    else if(!empty(DYNAMIC_PAGES[$page]) && file_exists(DYNAMIC_PAGES[$page]))
+      require(DYNAMIC_PAGES[$page]);
+      
+    else 
+      print(file_get_contents(ERROR_FILES['404']));
   }
 
   function generate_submenu() {
@@ -83,15 +92,23 @@
     }
 
     //CHECK IF USER IS ADMINISTRATOR
-    if($_SESSION['admin'] == true)
+    if($_SESSION['cpanel'] == true)
       echo("<li><a class=\"admin-cpanel\" href=\"?page=admin-cpanel\"><i class=\"fa fa-gear\"></i> Admin CPanel</a></li>");
   }
 
   // * SESSION PRINT
   function print_userTitle() {
-    echo isset($_SESSION['title']) ? $_SESSION['title'] : $_SESSION['username'];
+    echo !empty($_SESSION['title']) ? $_SESSION['title'] : $_SESSION['username'];
   }
 
   function print_username() {
-    echo isset($_SESSION['username']) ? '@'.$_SESSION['username'] : '@null';
+    echo !empty($_SESSION['username']) ? $_SESSION['username'] : 'null';
+  }
+
+  function print_avatarName() {
+    echo $_SESSION['avatar_img'];
+  }
+
+  function print_email() {
+    echo $_SESSION['email'];
   }

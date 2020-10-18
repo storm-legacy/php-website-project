@@ -35,6 +35,10 @@
   /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+.breakRow {
+  flex-basis: 100%;
+  height: 0;
+}
 .logo {
   display: flex;
   justify-content: center;

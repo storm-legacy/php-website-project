@@ -77,8 +77,6 @@ if(isset($_POST['register-submit'])) {
   //In case of problems return to screen with 'sqlerror'
   if(!mysqli_stmt_prepare($stmt, $sqlQueryUsername)) {
     //inform about error
-    mysqli_stmt_close($stmt); //disconnect from database
-    mysqli_close($connection);
     header("Location: $LOGIN_PAGE&error=sqlerr");  //! error 'sqlerr'
     exit();
   //Execute if everything is in order
@@ -99,8 +97,6 @@ if(isset($_POST['register-submit'])) {
   $stmt = mysqli_stmt_init($connection);
 
   if(!mysqli_stmt_prepare($stmt, $sqlQueryEmail)) {
-    mysqli_stmt_close($stmt);
-    mysqli_close($connection);
     header("Location: $LOGIN_PAGE&error=sqlerr");  //! error 'sqlerr'
     exit();
 
@@ -130,16 +126,20 @@ if(isset($_POST['register-submit'])) {
   
   $connection -> autocommit(FALSE); //disable autocommit - lol
   
-  $SQL = "INSERT INTO users (user_username, user_email, user_password)  VALUES (?, ?, ?)"; //user creating row
-  if($stmt = $connection->prepare($SQL)) {
+  if($stmt = $connection->prepare("INSERT INTO users (user_username, user_email, user_password) VALUES (?, ?, ?)")) {
     $encryptedPasswd = password_hash($passwd_1, PASSWORD_BCRYPT); //password encryption
 
     $stmt->bind_param("sss", $username, $email, $encryptedPasswd);
     $stmt->execute();
     $stmt->close();
 
-    $stmt = $connection->prepare("INSERT INTO perms (id_user) VALUES ((SELECT id_user FROM users WHERE user_username=?))"); //add coresponding permissions row
+    $stmt = $connection->prepare("INSERT INTO usersPermissions (id_user) VALUES ((SELECT id_user FROM users WHERE user_username=?))"); //add coresponding permissions row
     $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->close();
+
+    $stmt = $connection->prepare("INSERT INTO usersInfo (id_user, title) VALUES ((SELECT id_user FROM users WHERE user_username=?), ?)"); //add coresponding permissions row
+    $stmt->bind_param("ss", $username, $username);
     $stmt->execute();
     $stmt->close();
 

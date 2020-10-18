@@ -1,6 +1,6 @@
 <?php
   //if user doesn't have admin rights inform and return to main
-  if($_SESSION['admin'] != true) {
+  if($_SESSION['cpanel'] != true) {
     header("Location: ../../index.php?page=home&error=insufficientpermissions");
     exit();
   }
@@ -13,7 +13,6 @@
   <title><?php print_name(); ?> | ADMIN PANEL</title>
   <link rel="stylesheet" href="../../styles/font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../../styles/cpanel.css">
-  <script src="../../scripts/functions.js"></script>
   <script src="../../scripts/cpanel.js"></script>
 </head>
 <body>
@@ -22,12 +21,6 @@
       <span><?php echo(get_name(1)."<i>".get_name(2)."</i>"); ?></span>
       <span class="cpanelLogo">CPanel</span>
     </div>
-
-    <!-- <span class="exitButton">
-      <a href="?page=home">
-        <i class="fa fa-undo"></i>
-      </a>
-    </span> -->
   </header>
 
   <aside>

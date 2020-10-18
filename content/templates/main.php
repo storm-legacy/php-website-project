@@ -14,9 +14,7 @@
   <title><?php print_name(); ?> | <?php echo(strtoupper($_GET['page'])); ?></title>
   <link rel="stylesheet" href="../../styles/font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../../styles/main.css">
-  <script src="../../scripts/functions.js"></script>
-  <script src="../../scripts/main.js"></script>
-  <script src="../../scripts/html5-video-player.js"></script>
+  <script type="module" src="../../scripts/main.js"></script>
 </head>
 <body>
   <div class="errorBlock noselect">
@@ -50,12 +48,12 @@
 
             <div class="profileContainer noselect">
               <div class="profileIcon">
-                <img class="noselect" src="img/template_avatar.jpg" alt="avatar">
+                <img class="noselect" src="usr_files/avatars/<?php print_avatarName(); ?>" alt="avatar">
               </div>
 
               <div class="text">
                 <span class="title"><?php print_userTitle(); ?></span>
-                <span class="username"><?php print_username(); ?></span>
+                <span class="username">@<?php print_username(); ?></span>
               </div>
 
               <div class="userPanel">
@@ -73,19 +71,9 @@
 
       <div class="content">
         <main>
-          <?php if($_GET['page'] == 'browse') {
-
-            require(".../../php-backend/printVideo-script.php");
-            echo '<div class="videosGrid">';
-            generate_videos();
-            echo '</div>';
-
-          } else if ($_GET['page'] == 'video'){
-            echo 'kek';
-          } else {
-            print_content($_GET['page']); 
-          }
-            ?>
+          <?php
+            print_content($_GET['page']);
+          ?>
         </main>
       </div>
 

@@ -1,27 +1,31 @@
 <?php
-  if(empty($_SESSION['id_user'])) {
-    header("Location: ../index.php?page=login");
-    exit();
-  }
   require('php-backend/database-conn.php');
 
-  $SQL = "SELECT v.title, v.duration, v.views, u.user_username as author, v.file_video, v.file_thumbnail, v.status FROM videos as v, users as u WHERE u.id_user=v.author_id ";
-  $stmt = $connection -> stmt_init();
+  $thumbnails_folder = "usr_files/thumbnails";
+  $SQL ='
+  SELECT
+    v.title,
+    vf.duration,
+    v.views,
+    ui.title as "author",
+    CONCAT(th.thumbnail_code, ".", th.extension) as "thumbnail_file",
+    vf.video_code,
+    v.status
+  FROM
+    videos as v,
+    videosFiles as vf,
+    thumbnailsFiles as th,
+    usersInfo as ui,
+    users as u
+  WHERE
+    v.videoFile_id=vf.id_videoFile AND
+    v.thumbnailFile_id=th.id_thumbnail AND
+    v.author_id=u.id_user AND ui.id_user=u.id_user;';
+
+  $stmt = $connection->stmt_init();
   $stmt->prepare($SQL);
   $stmt->execute();
   $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
-  $thumbnails_folder = "usr_files/thumbnails";
-  $videos_folder = "usr_files/videos";
-  
-  // $key = [
-  //   "file_video" => '00000000',
-  //   "file_thumbnail" => '00000000',
-  //   "duration" => '7650',
-  //   "title" => 'template_video',
-  //   "author" => 'helloKitty',
-  //   "views" => '1000000'
-  // ];
 
   function pretty_viewCount($views) {
     if($views < 1000)
@@ -64,23 +68,18 @@
       return $hour.":".$min.":".$sec;
     }
   }
-
-  function generate_videos() {
-
-    global $result;
-    global $thumbnails_folder;
-    global $videos_folder;
-
+?>
+<div class="videosGrid">
+  <?php
     foreach($result as $item => $key) {
 
       if($key['status'] == 'public') {
-        echo "<div class=\"video-block\"><a href=\"?page=video&link=".$key['file_video']."\">";
-        echo "<div class=\"thumbnail\"><img src=\"".$thumbnails_folder."/".$key['file_thumbnail'].".jpg\" alt=\"video-img\">";
+        echo "<div class=\"video-block\"><a href=\"?page=video&link=".$key['video_code']."\">";
+        echo "<div class=\"thumbnail\"><img src=\"".$thumbnails_folder."/".$key['thumbnail_file']."\" alt=\"video-img\">";
         echo "<span>".pretty_duration($key['duration'])."</span></div></a><div class=\"desc\">";
         echo "<a href=\"#\" class=\"title\">".$key['title']."</a><a href=\"#\" class=\"author\">@".$key['author']."</a>";
         echo "<span class=\"viewCount\"> - ".pretty_viewCount($key['views'])." views</span></a></div></div>";
       }
     }
-
-
-  }
+  ?>
+</div>

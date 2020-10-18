@@ -5,14 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../styles/font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../styles/login.css">
-  <script src="../../scripts/functions.js"></script>
-  <?php
-    if($_GET['page'] == "login") 
-      echo("<script src=\"../scripts/login-page.js\"></script>");
-
-    else if($_GET['page'] == "register") 
-      echo("<script src=\"../scripts/register-page.js\"></script>");
-  ?>
+  <script type='module' src="../scripts/login.js"></script>
   <title><?php print_name(); ?>: <?php echo strtoupper($_GET['page'])  ?></title>
 </head>
 <body>
