@@ -1,6 +1,6 @@
 <?php 
   //Variables
-  require("init-variables.php");
+  require("modules/init.php");
 
 // ------------------------------------------------ \\
 //                  CONFIGURATION
@@ -8,14 +8,6 @@
   const CONF = [
     "name" => ["Kitcat", "Tube"],
     "author" => "storm-legacy",
-  ];
-
-  //Menu definition referencing CONTENT_FILES array
-  // "reference_name" => ["button_name", "icon from FA4"]
-  const SUBMENU = [
-    "profile" => ["Profile", "fa-user"],
-    "browse" => ["Browse", "fa-eye"],
-    "upload" => ["Upload", "fa-arrow-up"]
   ];
 
   //MAIN WEBPAGE TEMPLATES
@@ -32,20 +24,17 @@
   //Content to be placed inside templates
   const CONTENT_FILES = [
     // ! ONLY TO BE USED with login-template
-    "login" => CONTENT_FOLDER."login.phtml",
-    "register" => CONTENT_FOLDER."register.phtml",
-    "terms-of-use" => CONTENT_FOLDER."terms-of-use.phtml",
-
-    // * OTHER PAGES
-    "upload" => CONTENT_FOLDER."upload.phtml",
-    "home" => CONTENT_FOLDER."home.phtml",
-
+    "login" => SUBPAGES_FOLDER."login.phtml",
+    "register" => SUBPAGES_FOLDER."register.phtml",
+    "terms-of-use" => SUBPAGES_FOLDER."terms-of-use.phtml",
+    
+    //Normal pages
+    "browse" => SUBPAGES_FOLDER."browse.phtml",
   ];
 
   const DYNAMIC_PAGES = [
-    "browse" => CONTENT_FOLDER."browse.php",
-    "video" => CONTENT_FOLDER."video.php",
-    "profile" => CONTENT_FOLDER."profile.php"
+    "video" => SUBPAGES_FOLDER."video.php",
+    "profile" => SUBPAGES_FOLDER."profile.php"
   ];
 
 // ------------------------------------------------------------------ \\
@@ -97,7 +86,7 @@
   }
 
   // * SESSION PRINT
-  function print_userTitle() {
+  function print_title() {
     echo !empty($_SESSION['title']) ? $_SESSION['title'] : $_SESSION['username'];
   }
 
@@ -105,10 +94,11 @@
     echo !empty($_SESSION['username']) ? $_SESSION['username'] : 'null';
   }
 
-  function print_avatarName() {
+  function print_avatar() {
     echo $_SESSION['avatar_img'];
   }
 
   function print_email() {
     echo $_SESSION['email'];
   }
+

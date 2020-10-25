@@ -48,7 +48,7 @@ termsOfUsage.addEventListener("click", () => {
 if (GET()['error'] != undefined && GET()['error'] != null) {
 
   let errorMsg = "";
-  let errArr = GET()['error'].split('#');
+  let errArr = GET()['error'].split('^');
 
   // ! missing email
   if (errArr.indexOf("eE") > -1) {

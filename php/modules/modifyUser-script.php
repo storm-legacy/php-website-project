@@ -25,7 +25,7 @@
           $errorMsg .= "eM";
 
       if($title != null)
-        if(!preg_match("/^[a-zA-Z0-9_ ]{4,60}$/", $title))
+        if(!preg_match("/^[a-zA-Z0-9_ ]{4,20}$/", $title))
           $errorMsg .= "tI";
     }
 

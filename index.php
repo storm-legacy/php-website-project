@@ -1,13 +1,15 @@
 <?php
 session_start();
-require($_SERVER['DOCUMENT_ROOT'].'/php-backend/config.php'); //download confiuration
+require($_SERVER['DOCUMENT_ROOT'].'/php/config.php'); //download confiuration
 
 
 if(isset($_SESSION['id_user'])) {
-
+  if(!isset($_GET['page']))
+    $_GET['page'] = 'home';
+    
   //check for logout link
-  if(isset($_GET['logout']) && $_GET['logout'] == true)
-    header("Location: php-backend/logout-script.php");
+  if(isset($_GET['page']) && $_GET['page'] == "logout")
+    header("Location: php/logout.php");
 
   else if ($_GET['page'] == 'admin-cpanel') 
     require(get_template_path('cpanel'));

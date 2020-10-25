@@ -29,7 +29,7 @@ passwordInput.addEventListener("change", () => {
 if (GET()['error'] != undefined && GET()['error'] != null) {
 
   let errorMsg = "";
-  let errArr = GET()['error'].split('#');
+  let errArr = GET()['error'].split('^');
 
   // ! INVALID USER OR PASSWORD
   if (errArr.indexOf('invalidlogin') > -1) {

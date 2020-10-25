@@ -4,7 +4,11 @@
     header("Location: ../../index.php?page=login");
     exit();
   }
-  
+
+  //if user tries to access register and login page while logged
+  if($_GET['page'] == "register" || $_GET['page'] == "login") {
+    header("Location: ../../index.php?page=home");
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,9 +16,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?php print_name(); ?> | <?php echo(strtoupper($_GET['page'])); ?></title>
-  <link rel="stylesheet" href="../../styles/font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../../styles/main.css">
-  <script type="module" src="../../scripts/main.js"></script>
+  <script src="./scripts/anime.min.js"></script>
+  <script type="module" src="./scripts/main.js"></script>
 </head>
 <body>
   <div class="errorBlock noselect">
@@ -25,72 +29,50 @@
     </div>
   </div>
   <div class="mainGrid">
-
     <header>
-      <span class="submenu-button-header fa fa-bars"></span>
-      <div class="logo">
-        <a href="?page=home"><span><?php echo(get_name(1)."<i>".get_name(2)."</i>"); ?></span></a>
+      <nav>
+        <ul>
+          <li><span class="icon upload uploadButton"></a></li>
+        </ul>
+        <ul>
+          <li><span class="icon menu profileButton"></span></li>
+        </ul>
+        <div class="uploadBlock">
+            <span class="icon upload"></span><span>Drop file to upload</span>
+        </div>
+        <div class="profileBlock">
+          <div class="avatar">
+            <img src="usr_files/avatars/<?php print_avatar(); ?>" alt="avatar">
+          </div>
+          <span class="title"><?php print_title(); ?></span>
+          <span class="username">@<?php print_username(); ?></span>
+          <div class="bottomNav">
+            <a href="?page=profile"><span class="icon edit-profile"></span><span> Profile</span></a>
+            <a class="logoutButton" href="?page=logout"><span class="icon logout"></span><span> Logout</span></a>
+          </div>
+        </div>
+      </nav>
+      <div class="secondBlock">
+        <div class="searchBox">
+          <input type="text" name="" id="">
+          <span class="icon search"></span>
+        </div>
       </div>
-      <div class="PLACEHOLDER"></div>
-      <div class="PLACEHOLDER"></div>
     </header>
 
-    <div class="flexContainer">
-      <div class="submenuContainer">
-        <aside>
-
-            <div class="top">
-              <span class="submenu-button-submenu fa fa-close"></span>
-              <div class="logo">
-                <a href="?page=home"><span><?php echo(get_name(1)."<i>".get_name(2)."</i>"); ?></span></a>
-              </div>
-            </div>
-
-            <div class="profileContainer noselect">
-              <div class="profileIcon">
-                <img class="noselect" src="usr_files/avatars/<?php print_avatarName(); ?>" alt="avatar">
-              </div>
-
-              <div class="text">
-                <span class="title"><?php print_userTitle(); ?></span>
-                <span class="username">@<?php print_username(); ?></span>
-              </div>
-
-              <div class="userPanel">
-                <ul>
-                  <?php generate_submenu(); ?>
-                </ul>
-              </div>
-            </div>
-
-            <div class="bottom">
-              <a href="index.php?logout=true"><i class="fa fa-lock"></i> Logout</a>
-            </div>
-        </aside>
-      </div>
-
-      <div class="content">
-        <main>
-          <?php
-            print_content($_GET['page']);
-          ?>
-        </main>
-      </div>
-
-    </div> <!-- flexContainer div end -->
+    <main>
+      <?php
+        if(!isset($_GET['page']) || $_GET['page'] == "home") {
+          print_content('browse');
+        }
+      ?>
+    </main>
 
     <footer>
-      <div class="footerGrid">
-        <div class="firstOne">
-        </div>
-        <div class="middle">
-          <span>© by <?php echo(get_config('author')); ?></span>
-        </div>
-        <div class="lastOne">
-        </div>
-      </div>
+      <span>© by <?php echo(get_author()); ?></span>
     </footer>
   </div>
+
+
 </body>
 </html>
-

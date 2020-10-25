@@ -74,49 +74,36 @@
   padding: 0 0.1em 0 0.1em;
   margin-left: 0.1em;
 }
-body {
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('pattern/qbkls.png') repeat;
+span.icon {
+  font-family: 'FA';
 }
-body main .logo {
-  font-size: 80px;
+span.icon.play::before {
+  content: '\f144';
 }
-body main .content {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  flex-flow: column nowrap;
-  width: 100%;
+span.icon.pause::before {
+  content: '\f28b';
 }
-body main .content h1 {
-  margin-top: 20px;
-  text-align: center;
+span.icon.home::before {
+  content: '\f015';
 }
-body main .content div {
-  padding: 0 40px 10px 40px;
-  box-sizing: border-box;
-  display: block;
-  color: #111;
+span.icon.more::before {
+  content: '\f13a';
 }
-body main .content div > ol {
-  padding-left: 15px;
-  list-style-type: upper-latin;
-  font-size: 20px;
+span.icon.search::before {
+  content: '\f002';
 }
-body main .content div > ol li {
-  padding: 3px;
+span.icon.menu::before {
+  content: '\f0c9';
 }
-body main .content div > ol ol {
-  padding-left: 30px;
-  list-style-type: decimal;
-  font-size: 18px;
+span.icon.upload::before {
+  content: '\f0ee';
 }
-body main .content div > ol ol li {
-  padding: 1px;
+span.icon.profile:before {
+  content: '\f007';
 }
-body main .content div > ol ol li ol {
-  list-style-type: lower-roman;
-  font-size: 16px;
+span.icon.logout:before {
+  content: '\f08b';
 }
-body main .content div > ol ol li ol li {
-  padding: 0;
+span.icon.edit-profile::before {
+  content: '\f02a';
 }
