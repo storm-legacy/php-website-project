@@ -6,3 +6,10 @@ export const GET = () => {
 
   return list;
 };
+
+export const empty = (value) => {
+  if(value === null || value === undefined || value === "")
+    return true;
+  else
+    return false;
+}

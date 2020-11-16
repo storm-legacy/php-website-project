@@ -1,16 +1,11 @@
 <?php
-  ini_set('display_errors', 1);
-  ini_set('display_startup_errors', 1);
-  error_reporting(E_ALL);
-  mysqli_report(MYSQLI_REPORT_STRICT);
-
-  define('ROOT', $_SERVER['DOCUMENT_ROOT']); //get ROOT folder location
+  define('ROOT', $_SERVER['DOCUMENT_ROOT'].'/'); //get ROOT folder location
   define('INDEX_FILE', ROOT."/index.php");
 
   //TEMPLATES FOLDERS
-  define('CONTENT_FOLDER', ROOT."/content/");
-  define('USERS_FILES', ROOT."/usr_files/");
-  define('TMP', ROOT."/tmp/");
+  define('CONTENT_FOLDER', ROOT."content/");
+  define('USERS_FILES', ROOT."usr_files/");
+  define('TMP', USERS_FILES."tmp/");
 
   define('TEMPLATES_FOLDER', CONTENT_FOLDER."templates/");
   define("SUBPAGES_FOLDER", CONTENT_FOLDER."subpages/");

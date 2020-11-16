@@ -18,7 +18,7 @@
   ];
 
   const ERROR_FILES = [
-    "404" => ERRORS_FOLDER."404.phtml",
+    404 => ERRORS_FOLDER."404.phtml",
   ];
   
   //Content to be placed inside templates
@@ -34,7 +34,9 @@
 
   const DYNAMIC_PAGES = [
     "video" => SUBPAGES_FOLDER."video.php",
-    "profile" => SUBPAGES_FOLDER."profile.php"
+    "profile" => SUBPAGES_FOLDER."profile.php",
+    "upload" => SUBPAGES_FOLDER."upload.php",
+    "profile-edit" => SUBPAGES_FOLDER."profile-edit.php"
   ];
 
 // ------------------------------------------------------------------ \\
@@ -73,6 +75,14 @@
       
     else 
       print(file_get_contents(ERROR_FILES['404']));
+  }
+
+  function print_error($code) {
+    switch($code) {
+      case 404:
+        file_get_contents(ERROR_FILES[$code]);
+      break;
+    }
   }
 
   function generate_submenu() {

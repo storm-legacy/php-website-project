@@ -7,7 +7,7 @@
 
   //if user tries to access register and login page while logged
   if($_GET['page'] == "register" || $_GET['page'] == "login") {
-    header("Location: ../../index.php?page=home");
+    $_GET['page'] = 'home';
   }
 ?>
 <!DOCTYPE html>
@@ -28,17 +28,18 @@
       <button>OK</button>
     </div>
   </div>
-  <div class="mainGrid">
+  <div class="mainGrid slim">
     <header>
       <nav>
         <ul>
-          <li><span class="icon upload uploadButton"></a></li>
+        <?php if($_GET['page'] != "home") print("<li><span class='icon home homeButton'></span></li>")  ?>
+          <li><span class="icon upload uploadButton"></span></li>
         </ul>
         <ul>
           <li><span class="icon menu profileButton"></span></li>
         </ul>
         <div class="uploadBlock">
-            <span class="icon upload"></span><span>Drop file to upload</span>
+          <span class="dropdown icon upload"></span>
         </div>
         <div class="profileBlock">
           <div class="avatar">
@@ -47,14 +48,17 @@
           <span class="title"><?php print_title(); ?></span>
           <span class="username">@<?php print_username(); ?></span>
           <div class="bottomNav">
-            <a href="?page=profile"><span class="icon edit-profile"></span><span> Profile</span></a>
+            <a class='uploadsButton' href="index.php?page=home&search=%self%"><span class='icon upload'></span><span>My uploads</span></a>
+          </div>
+          <div class="bottomNav">
+            <a href="?page=profile-edit"><span class="icon edit-profile"></span><span> Profile</span></a>
             <a class="logoutButton" href="?page=logout"><span class="icon logout"></span><span> Logout</span></a>
           </div>
         </div>
       </nav>
       <div class="secondBlock">
         <div class="searchBox">
-          <input type="text" name="" id="">
+          <input type="text" name="" id="searchBoxInput">
           <span class="icon search"></span>
         </div>
       </div>
@@ -62,14 +66,35 @@
 
     <main>
       <?php
-        if(!isset($_GET['page']) || $_GET['page'] == "home") {
-          print_content('browse');
+      if(isset($_GET['page']))
+        switch($_GET['page']) {
+          case "home":
+            print_content('browse');
+          break;
+
+          case "video":
+            print_content('video');
+          break;
+
+          case "upload":
+            print_content("upload");
+          break;
+
+          case "profile-edit":
+            print_content("profile-edit");
+          break;
+
+          default:
+            print_error(404);
+          break;
         }
+      else
+        print_error(404);
       ?>
     </main>
 
     <footer>
-      <span>© by <?php echo(get_author()); ?></span>
+    
     </footer>
   </div>
 

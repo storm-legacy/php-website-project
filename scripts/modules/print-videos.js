@@ -12,18 +12,22 @@ export class PrintVideos {
       if (this.xhttp.readyState == 4 && this.xhttp.status == 200) {
 
         this._parseJson(this.xhttp.responseText); //insert values into Json object
-        this.jsonObj.forEach(item => {
-          this._printVideo(item);
-        });
+        if(this.jsonObj != null) {
+          this.jsonObj.forEach(item => {
+            this._printVideo(item);
+          });
+        } else {
+          this._printNoMore();
+        }
       }
     }
   }
   
   //send POST resquest
-  _execute = (offset) => {
+  _execute = (postParameters) => {
     this.xhttp.open("POST", this.url, true);
     this.xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    this.xhttp.send(`offset=${offset}`);
+    this.xhttp.send(postParameters);
   }
 
   _parseJson = (string) => {
@@ -72,9 +76,9 @@ export class PrintVideos {
     else if(diff < (60 * 60 * 2)) return "1 hour ago";
     else if(diff < (60 * 60 * 24)) return Math.floor(diff / 3600) + " hours ago";
     else if(diff < (3600 * 24 * 2)) return "1 day ago";
-    else if(diff < (3600 * 24 * 30)) return Math.floor(diff / 3600 * 24) + " days ago";
+    else if(diff < (3600 * 24 * 30)) return Math.floor(diff / (3600 * 24)) + " days ago";
     else if(diff < (3600 * 24 * 30 * 2)) return "1 month ago";
-    else if (diff < (3600 * 24 * 30 * 12)) return Math.floor(diff / 3600 * 24 * 30) + " months ago";
+    else if (diff < (3600 * 24 * 30 * 12)) return Math.floor(diff / (3600 * 24 * 30)) + " months ago";
     else if(diff < (3600 * 24 * 30 * 12 * 2)) return "1 year ago";
     else return Math.floor(diff / (3600 * 24 * 30 * 12)) + " years ago";
   }
@@ -83,15 +87,46 @@ export class PrintVideos {
     let videoBlock = `<div class="video-block"><a href="?page=video&link=${values['id']}">`;
     videoBlock += `<img class="thumbnail" src="usr_files/thumbnails/${values['thumbnail_file']}" alt="thumbnail" />`
     videoBlock += `<span class="title">${values['title']}</span><span class="duration">${this._prettyDuration(values['duration'])}</span></a>`;
-    videoBlock += `<div class="info"><a href=""><span class="author">@${values['author']}</span></a>`;
+    videoBlock += `<div class="info"><a href=""><span class="author">#${values['author']}</span></a>`;
     videoBlock += `<span class="views">${this._prettyViewCount(values['views'])} views</span><span class="upload-date">  ${this._prettyDate(values['date'])} </span>`
     videoBlock += `</div>`
 
     this.contentArea.innerHTML += videoBlock;
   }
 
-  printList = (offset = 0) => {
-    this._execute(offset);
+  _printNoMore = () => {
+    this.contentArea.innerHTML += "<div> No more videos to load </div>";
+  }
+
+  printByOffset = (offset = 0, limit = 15) => {
+    this._clearAll();
+    this._execute(`offset=${offset}&limit=${limit}`);
+  }
+
+  printByString = (string, offset = 0, limit = 15) => {
+    this._clearAll();
+    this._execute(`offset=${offset}&pattern=${string}&limit=${limit}`);
+  }
+
+  printMoreByOffset = (offset, limit = 15) => {
+    this._execute(`offset=${offset}&limit=${limit}`);
+  }
+
+  printMoreByString = (string, offset, limit = 15) => {
+    this._execute(`offset=${offset}&pattern=${string}&limit=${limit}`);
+  }
+
+  printByUsername = (username, offset = 0, limit = 15) => {
+    this._clearAll();
+    this._execute(`offset=${offset}&username=${username}&limit=${limit}`)
+  }
+
+  printMoreByUsername = (username, offset, limit = 15) => {
+    this._execute(`offset=${offset}&username=${username}&limit=${limit}`)
+  }
+
+  _clearAll = () => {
+    this.contentArea.innerHTML = "";
   }
 
   

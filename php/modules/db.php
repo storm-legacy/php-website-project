@@ -14,7 +14,7 @@
     private $connection_closed = FALSE;
     private $result_stored = false;
 
-    function __construct ($host='mysql',$user='root',$passwd='root',$db="cloneTube", $charset="utf8") {
+    function __construct ($host='mysql',$user='kittyHandler',$passwd='bHhdwjKOV1z4ItEyhMtiFYlx8mRiXUoZP#aD*jZKxt$OPcxxd*',$db="kitcatTube", $charset="utf8") {
       $this->conn = new mysqli($host, $user, $passwd, $db)
       or die('Could not connect to MySQL database' . $conn-> connect_error);
       $this->conn->set_charset($charset);
@@ -55,6 +55,22 @@
         
       return $this;
     }
+
+    public function justQuery($sqlQuery) {
+      if(isset($this->result))
+        unset($this->result);
+
+      if($this->stmt = $this->conn->prepare($sqlQuery)) {
+        $this->stmt->execute();
+
+        if($this->stmt->errno) {
+          $this->error('Unable to process mysql query (check your params) - ' . $this->stmt->error);
+        }
+      } else 
+        $this->error('Unable to prepare MySQL statement (check your syntax) - '. $this->conn->error);
+
+      return $this;
+    }
     
     public function setAutocommit($tf) {
       $this->autocommit = $tf;
@@ -63,6 +79,10 @@
 
     public function commit() {
       $this->conn->commit();
+      $this->_stmtClose();
+    }
+    public function rollback() {
+      $this->conn->rollback();
       $this->_stmtClose();
     }
 
